@@ -1,0 +1,31 @@
+.header {
+    background-color: grey;
+}
+
+
+/* .section-signup {
+    display: block;
+} */
+
+.hidden {
+    display: none;
+}
+
+.enter-form {
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-btns {
+    border: 5px solid red;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#registration-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

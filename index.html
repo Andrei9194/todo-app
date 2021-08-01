@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js" defer></script>
+    <script src="./js-files/firebase.config.js" defer></script>
+    <script src="./js-files/script.js" defer></script>
+    <title>ToDo App</title>
+</head>
+
+<body>
+    <header class="header hidden">
+        <div class="logo-area">
+            <img src="" alt="logo-main" class="logo-nav-menu" />
+        </div>
+        <nav class="nav-menu">
+            <ul class="nav-links">
+                <li class="logged-out">
+                    <a href="" class="logout">Log out</a>
+                </li>
+                <li class="logged-out">
+                    <a href="" class="account-info">Account</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="regist-section logged-in">
+        <div class="main-logo">
+            <img src="" alt="main-logo" class="logo">
+        </div>
+        <div class="enter-form">
+            <div class="main-btns">
+                <button class="regist-btn signup">Sign Up</button>
+                <button class="regist-btn signin" data="signin-btn">Sign In</button>
+            </div>
+            <form id="registration-form">
+                <div class="input-field">
+                    <label for="nickname">
+                        <input type="text" placeholder="Enter your Nickname" id="nickname">
+                    </label>
+                </div>
+                <div>
+                    <label for="email">
+                    <input type="email" id="email" placeholder="Enter your Email" required />
+                  </label>
+                </div>
+                <div class="input-field">
+                    <label for="password">
+                    <input type="password" id="password" placeholder="Password" required />
+                  </label>
+                </div>
+                <div>
+                    <button class="signup-submit-btn">Sign up / Sign In</button>
+                </div>
+            </form>
+        </div>
+        </div>
+
+        <!-- <section class="section-account hidden" style="border: 1px solid black">
+      <h4>Account details</h4>
+      <div class="account-content">BLA Bla</div>
+    </section> -->
+
+        <!-- 
+    <section class="toDo-section hidden">
+        <form id="todo-form">
+            <input type="text" id="todo-input" placeholder="Add you task" />
+            <button class="add-task-button" data="addTask-btn">+</button>
+        </form>
+    </section>
+
+    <div class="todo-list"></div> -->
+</body>
+
+</html>
