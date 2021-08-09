@@ -11,7 +11,8 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js" defer></script>
     <script src="./js-file/firebase.config.js" defer></script>
     <script src="./js-file/script.js" defer></script>
-    <title>ToDo App</title>
+    <link rel="icon" href="./todo.png" type="image/gif">
+    <title>ToDoList</title>
 </head>
 
 <body>
@@ -52,7 +53,7 @@
                   </label>
                 </div>
                 <div>
-                    <button class="signup-submit-btn">Submit</button>
+                    <button class="submit-btn">Sign Up</button>
                 </div>
             </form>
 
@@ -60,7 +61,7 @@
     </section>
     <section class="section-account hidden" style="border: 1px solid black">
         <h4>Account details</h4>
-        <div class="account-content">BLA Bla</div>
+        <div class="account-content"></div>
     </section>
     <section class="toDo-section signed-out ">
         <form id="todo-form">
@@ -68,8 +69,8 @@
             <button class="add-task-button" data="addTask-btn">+</button>
         </form>
     </section>
-
     <div class="todo-list"></div>
+
 </body>
 
 </html>
