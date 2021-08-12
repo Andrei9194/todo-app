@@ -8,14 +8,34 @@ const registForm = document.querySelector('#signup-form')
 const registSection = document.querySelector('.regist-section')
 const submitButton = document.querySelector('.submit-btn')
 
+const focusInputField = document.querySelectorAll('.input-field')
+const userNameinput = document.querySelector('.username');
+
+
 signUpButton.addEventListener('click', () => {
     registForm.id = 'signup-form'
     submitButton.textContent = 'Sign Up'
+    signUpButton.classList.toggle('unfocus')
+    signInButton.classList.toggle('unfocus')
+    registForm.classList.remove('focus-field')
+    submitButton.classList.remove('focus-submit-btn')
+    focusInputField.forEach(input => {
+        input.classList.remove('focus-input-field')
+    })
+    userNameinput.classList.remove('hidden')
 })
 
 signInButton.addEventListener('click', () => {
     registForm.id = 'signin-form'
     submitButton.textContent = 'Sign In'
+    signInButton.classList.toggle('unfocus')
+    signUpButton.classList.toggle('unfocus')
+    userNameinput.classList.add("hidden")
+    registForm.classList.add('focus-field')
+    submitButton.classList.add('focus-submit-btn')
+    focusInputField.forEach(input => {
+        input.classList.add('focus-input-field')
+    })
 
 })
 
@@ -25,10 +45,10 @@ const getData = (e) => {
     const password = registForm['password'].value;
 
     const datas = {
-        email,
-        password
-    }
-
+            email,
+            password
+        }
+        // посмотреть как исправить
     if (registForm.id === 'signup-form') {
         userSignUp(datas)
     } else {
@@ -65,7 +85,7 @@ const signOutLinks = document.querySelectorAll('.signed-out')
 const signInLinks = document.querySelector('.signed-in');
 const accountContent = document.querySelector('.account-content')
 
-const signLinks = (signin) => { //(token)
+const signLinks = (signin) => { //(token) // посомтреть как исправить
     if (signin) {
         db.collection('users').doc(signin.uid).get().then((user) => {
             const html = `
@@ -80,6 +100,7 @@ const signLinks = (signin) => { //(token)
     } else {
         signOutLinks.forEach(link => link.style.display = "none")
         signInLinks.style.display = "block"
+        accountContent.innerHTML = ''
     }
 }
 
@@ -214,4 +235,10 @@ toDoForm.addEventListener('submit', (e) => {
         toDoForm.reset();
         alert(err.message)
     })
+})
+
+const accountImg = document.querySelector('[data-account-img]')
+console.log(accountImg)
+accountImg.addEventListener('click', (e) => {
+    console.log("Avatar")
 })

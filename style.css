@@ -1,11 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+html * {
+    font-family: 'Roboto Slab', serif;
+}
+
+body {
+    margin: 0;
+    background-color: #052E55;
+}
+
 .header {
     background-color: grey;
 }
 
+.regist-section {
+    margin-top: 30px;
+}
 
-/* .section-signup {
-    display: block;
-} */
+.main-logo {
+    display: flex;
+    align-self: center;
+    margin-bottom: 30px;
+}
+
+.logo {
+    width: 150px;
+    margin: 0 auto;
+}
+
+.mainForm {
+    margin: 0 auto;
+    width: 420px;
+    height: 310px;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+#signup-form {
+    padding-top: 25px;
+}
+
+.focus-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.focus-submit-btn {
+    margin-bottom: 30px;
+}
+
+.regist-btn {
+    width: 210px;
+    height: 50px;
+    background: none;
+    border: none;
+    letter-spacing: 0.05em;
+    color: #052E55;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.signup {
+    border-radius: 5px 0px 0px 0px;
+}
+
+.signin {
+    border-radius: 0px 5px 0px 0px;
+}
+
+.unfocus {
+    background: #EAEAEA;
+    opacity: 0.6;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-weight: normal;
+}
+
+.opacity {
+    opacity: 0.7;
+}
+
+.input-field {
+    margin-top: 10px;
+    border: 1px solid #9A9A9A;
+    border-radius: 5px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+}
+
+.input-field-btn {
+    border: none;
+}
+
+.focus-input-field {
+    margin-top: 20px;
+}
+
+.submit-btn {
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    height: 40px;
+    background-color: #2580EA;
+    padding: 0px;
+    margin-bottom: 25px;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.input-img {
+    display: flex;
+    align-self: center;
+    width: 15px;
+    height: 15px;
+    padding-left: 13px;
+    padding-right: 13px;
+}
+
+.regist-input {
+    border: none;
+    border-left: 1px solid #9A9A9A;
+    width: 100%;
+    height: 40px;
+    opacity: 0.8;
+    opacity: 1;
+    padding-left: 5px;
+    background: white;
+}
+
+.regist-input:focus {
+    outline: none;
+}
+
+.regist-input:active {
+    background-color: none;
+}
 
 .hidden {
     display: none;
@@ -18,7 +156,6 @@
 }
 
 .main-btns {
-    border: 5px solid red;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -35,11 +172,8 @@
 }
 
 .label:before {
-    /* background-color: white; */
     content: " ";
     display: block;
-    /* border-radius: 50%; */
-    /* border: 1px solid grey; */
     position: absolute;
     top: -5px;
     left: -5px;
