@@ -1,0 +1,175 @@
+            .body-sign-out {
+                background: linear-gradient( #052E55 9.9%, rgba(79, 42, 126, 0.79) 60.42%, rgba(157, 103, 149, 0.8) 82.81%, rgba(227, 137, 137, 0.796375));
+                background-repeat: no-repeat;
+                margin: 0;
+                margin-bottom: 30px;
+            }
+            
+            .header-signIn {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 540px;
+                margin: 0 auto;
+                margin-bottom: 50px;
+            }
+            
+            .logo-area,
+            .task-label {
+                width: 100%;
+            }
+            
+            .toDo-section {
+                width: 500px;
+                border-radius: 20px;
+                background: rgba(255, 255, 255, 0.5);
+                padding: 5px 3px;
+                margin: 0 auto;
+            }
+            
+            .todo-Form {
+                border-radius: 15px;
+                background-color: white;
+                margin: 10px;
+                padding: 3px;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .label-todo {
+                width: 100%;
+            }
+            
+            .todo-input {
+                height: 100%;
+                width: 280px;
+                border: none;
+                width: 100%;
+                font-size: 16px;
+                padding: 0 0 0 5px;
+            }
+            
+            .todo-input:focus,
+            .added-task:focus {
+                outline: none;
+            }
+            
+            .todo-input::placeholder {
+                font-size: 16px;
+                color: #CECDCD;
+            }
+            
+            .add-task-button {
+                display: flex;
+                align-items: center;
+                background: none;
+                border: none;
+            }
+            
+            .img-add-task {
+                align-items: center;
+                width: 45px;
+                padding-top: 5px;
+            }
+            
+            .add-task-button:active,
+            .button-delete:active,
+            .button-edit:active {
+                transform: scale(0.9);
+            }
+            
+            .todos-section {
+                background: rgba(255, 255, 255, 0.5);
+                padding: 5px 3px;
+                min-height: 100px;
+                width: 500px;
+                margin: 0 auto;
+                border-radius: 15px;
+                margin-top: 20px;
+            }
+            
+            .todo-section-text {
+                color: rgba(52, 51, 51, 0.8);
+                padding-left: 10px;
+            }
+            
+            .account-info {
+                border: none;
+                background: none;
+                margin-right: 10px;
+            }
+            
+            .lable-section {
+                width: 100%;
+                margin: 10px;
+                display: flex;
+                flex-direction: row;
+                justify-content: left;
+                flex: 1 1 0;
+            }
+            
+            .task-content {
+                border-radius: 15px;
+                background-color: white;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            
+            .todo-list {
+                padding: 10px;
+            }
+            
+            .added-task {
+                height: 100%;
+                border: none;
+                width: 100%;
+                padding: 0 0 0 5px;
+                font-size: 16px;
+                background-color: white;
+            }
+            
+            .added-task::placeholder {
+                font-size: 16px;
+                color: rgba(84, 78, 78, 0.8);
+            }
+            
+            .button-delete,
+            .button-edit {
+                margin-left: 5px;
+                border: none;
+                border-radius: 40%;
+                width: 45px;
+                height: 32px;
+                background: #d3d4d9;
+            }
+            
+            .button-area {
+                margin-right: 5px;
+                padding-right: 6px;
+            }
+            
+            .img-edit-task,
+            .img-delete-task {
+                width: 50%;
+            }
+            
+            .img-account {
+                border-radius: 50%;
+                width: 200px;
+                height: 200px;
+                border: none;
+            }
+            
+            .accoun-info-img {
+                border: 0;
+                border-radius: 50%;
+                height: 70px;
+                width: 70px;
+                cursor: pointer;
+            }
