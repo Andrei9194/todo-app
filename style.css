@@ -29,3 +29,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+.toDo-section {
+    border: 1px solid black;
+}
