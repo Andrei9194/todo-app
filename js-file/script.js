@@ -7,7 +7,6 @@ const signInButton = document.querySelector('.signin')
 const registForm = document.querySelector('#signup-form')
 const registSection = document.querySelector('.regist-section')
 const submitButton = document.querySelector('.submit-btn')
-
 const focusInputField = document.querySelectorAll('.input-field')
 const userNameinput = document.querySelector('.username');
 
@@ -15,28 +14,29 @@ const userNameinput = document.querySelector('.username');
 signUpButton.addEventListener('click', () => {
     registForm.id = 'signup-form'
     submitButton.textContent = 'Sign Up'
-    signUpButton.classList.toggle('unfocus')
-    signInButton.classList.toggle('unfocus')
+    signUpButton.classList.remove('unfocus')
+    signInButton.classList.add('unfocus')
     registForm.classList.remove('focus-field')
     submitButton.classList.remove('focus-submit-btn')
     focusInputField.forEach(input => {
         input.classList.remove('focus-input-field')
     })
     userNameinput.classList.remove('hidden')
+    registForm.reset();
 })
 
 signInButton.addEventListener('click', () => {
     registForm.id = 'signin-form'
     submitButton.textContent = 'Sign In'
-    signInButton.classList.toggle('unfocus')
-    signUpButton.classList.toggle('unfocus')
+    signInButton.classList.remove('unfocus')
+    signUpButton.classList.add('unfocus')
     userNameinput.classList.add("hidden")
     registForm.classList.add('focus-field')
     submitButton.classList.add('focus-submit-btn')
     focusInputField.forEach(input => {
         input.classList.add('focus-input-field')
     })
-
+    registForm.reset();
 })
 
 const getData = (e) => {
@@ -58,6 +58,7 @@ const getData = (e) => {
 }
 
 const header = document.querySelector('.header')
+const signOutBody = document.querySelector('body')
 
 const userSignIn = (token) => {
     auth.signInWithEmailAndPassword(token.email, token.password).then((user) => {
@@ -84,24 +85,30 @@ registForm.addEventListener('submit', getData);
 const signOutLinks = document.querySelectorAll('.signed-out')
 const signInLinks = document.querySelector('.signed-in');
 const accountContent = document.querySelector('.account-content')
+const headerSignIn = document.querySelector('.header')
 
 const signLinks = (signin) => { //(token) // посомтреть как исправить
     if (signin) {
         db.collection('users').doc(signin.uid).get().then((user) => {
             const html = `
-                <p>You email: ${signin.email}</p>
-                <p>You nickname: ${user.data().username}</p>
+                <p class='account-content username-info'>${user.data().username}</p>
+                <p class='account-content email-info'>${signin.email}</p>
             `
             accountContent.innerHTML = html;
 
         })
-        signOutLinks.forEach(link => link.style.display = "block")
-        signInLinks.style.display = "none"
+
+        // add function addProfilePicture
+        signOutLinks.forEach(link => link.classList.remove("hidden"))
+        signInLinks.classList.add('hidden')
+        headerSignIn.classList.add('header-signIn')
     } else {
-        signOutLinks.forEach(link => link.style.display = "none")
-        signInLinks.style.display = "block"
+        signOutLinks.forEach(link => link.classList.add("hidden"))
+        signInLinks.classList.remove('hidden')
+        headerSignIn.classList.remove('header-signIn')
         accountContent.innerHTML = ''
     }
+
 }
 
 
@@ -110,10 +117,21 @@ auth.onAuthStateChanged((user) => { //(token)
         db.collection('todo').onSnapshot((users) => {
             showTask(users)
             signLinks(user)
+
         })
+        signOutBody.classList.add('body-sign-out')
+        addImage(user.uid)
+        getProfilePicture(user.uid)
+            .then(imgUrl => {
+                imgAccount.src = imgUrl
+                accountImg.src = imgUrl
+            })
     } else {
         signLinks()
         showTask([])
+        getProfilePicture()
+        signOutBody.classList.remove('body-sign-out')
+        accountSection.classList.add('hidden')
     }
 })
 
@@ -121,12 +139,14 @@ const signOut = document.querySelector('.signout')
 
 signOut.addEventListener('click', (e) => {
     e.preventDefault();
-    auth.signOut()
+    auth.signOut();
 })
 
 const accoutInfo = document.querySelector('.account-info')
 const accountSection = document.querySelector('.section-account')
 
+const accountImg = document.querySelector('.accoun-info-img')
+console.log(accountImg.src)
 accoutInfo.addEventListener('click', (e) => {
     e.preventDefault();
     accountSection.classList.toggle("hidden");
@@ -140,17 +160,23 @@ const showTask = (tasks) => { //token
         const id = task.id;
         const data = task.data();
         const ul = `
-            <ul class="das">
-                <li class=""> 
-                <input type="checkbox" data-checkbox id="${id}" data-id="${id}" style="display: none"/>
-                <label for="${id}" class="label" data-label>
-                <img src="Group.png" alt="task-done" data-id="${id}" data-checkbox-img class="a" width = "5%"/>
-                </label>
-                    <input type='text'data-id="${id}" name="tasks" class="added-task" value='${data.task}' disabled/> 
-                    <button data-id="${id}" data-delete-btn>Delete</button>
-                    <button data-id="${id}" data-edit-btn>Edit</button
-                </li>
-            </ul>
+            <div>
+                <form class='task-content'>
+                    <div class='lable-section'>
+                        <label for="${id}" data-label>
+                            <img src="./assets/Group.png" alt="task-done" data-id="${id}" data-checkbox-img class="a" />
+                            <input type="checkbox" data-checkbox id="${id}"  style="display: none"/>
+                        </label>
+                        <label class="task-label" for="${id}">
+                            <input type='text' id="${id} "data-id="${id}" name="tasks" class="added-task" value='${data.task}' disabled/> 
+                        </label>
+                    </div>
+                    <div class='button-area'>
+                        <button data-id="${id}" class='button-edit' data-edit-btn><img src="./assets/edit_button.png" data-id="${id}" alt="add-task-button" class="img-edit-task"></button>
+                        <button data-id="${id}" class='button-delete' data-delete-btn ><img src="./assets/delete_button.png" data-id="${id}" alt="add-task-button" class="img-delete-task"></button>
+                    </div>
+                 </form>
+             </div>
             `
         html += ul
     });
@@ -159,6 +185,7 @@ const showTask = (tasks) => { //token
 
     toDoList.querySelectorAll('[data-delete-btn]').forEach(btn => {
         btn.addEventListener('click', (e) => {
+            e.preventDefault()
             const id = e.target.dataset.id
             db.collection('todo').doc(id).delete()
 
@@ -170,15 +197,24 @@ const showTask = (tasks) => { //token
     toDoList.querySelectorAll('[data-edit-btn]').forEach(btn => {
 
         btn.addEventListener('click', (e) => {
-
+            e.preventDefault()
             const id = e.target.dataset.id;
+            images.forEach(img => {
+                const imgId = img.dataset.id
+                if (imgId === id) {
+                    img.setAttribute("src", "Group.png")
+                }
+            })
             inputTasksEdit.forEach(task => {
                 const taskId = task.dataset.id
                 if (id === taskId) {
                     task.removeAttribute('disabled')
+                    task.style.textDecoration = 'none'
+                    task.style.borderBottom = '1px solid black'
                     task.addEventListener('keydown', (e) => {
                         if (e.keyCode === 13) {
                             task.setAttribute('disabled', true)
+                            task.style.border = 'none'
                             db.collection('todo').doc(id).update({
                                 task: task.value
                             })
@@ -193,13 +229,16 @@ const showTask = (tasks) => { //token
     const images = document.querySelectorAll('[data-checkbox-img]');
 
     checkbox.forEach(item => {
-        item.addEventListener('click', (e) => {
 
-            const id = e.target.dataset.id
+        item.addEventListener('change', (e) => {
+
+            const id = e.target.id;
+            const done = item.checked
+
+            db.collection('todo').doc(id).update({
+                done
+            })
             if (item.checked) {
-                db.collection('todo').doc(id).update({
-                    done: item.checked
-                })
                 inputTasksEdit.forEach(item => {
                     const itemId = item.dataset.id
                     if (itemId === id) {
@@ -209,12 +248,8 @@ const showTask = (tasks) => { //token
                 images.forEach(img => {
                     const imgId = img.dataset.id
                     if (imgId === id) {
-                        img.src = 'check.png'
+                        img.setAttribute("src", "./assets/check.png")
                     }
-                })
-            } else {
-                db.collection('todo').doc(id).update({
-                    done: item.checked
                 })
             }
         })
@@ -237,8 +272,26 @@ toDoForm.addEventListener('submit', (e) => {
     })
 })
 
-const accountImg = document.querySelector('[data-account-img]')
-console.log(accountImg)
-accountImg.addEventListener('click', (e) => {
-    console.log("Avatar")
-})
+
+let file = {}
+const userAvatar = document.querySelector('[data-userAvatar]')
+const imgAccount = document.querySelector('[data-account-img]')
+
+const addImage = (id) => {
+    userAvatar.addEventListener('change', (e) => {
+        file = userAvatar.files[0]
+        addPictureToStorage(id, file).then(() => {
+            console.log("upload", file.name)
+        })
+    })
+}
+
+const addPictureToStorage = (id, file) => {
+    return firebase.storage().ref(`images/${id}/profile.jpg`).put(file);
+}
+
+const getProfilePicture = id => {
+    return firebase.storage().ref(`images/${id}/profile.jpg`).getDownloadURL()
+}
+
+console.log(userAvatar)

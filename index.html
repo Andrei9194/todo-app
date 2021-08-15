@@ -5,10 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css-files/style.css" />
+    <link rel="stylesheet" href="./css-files/signIn.css">
+    <link rel="stylesheet" href="./css-files/account-section.css">
+    <link rel="stylesheet" href="./css-files/signOut.css">
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js" defer></script>
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-storage.js" defer></script>
+
     <script src="./js-file/firebase.config.js" defer></script>
     <script src="./js-file/script.js" defer></script>
     <link rel="icon" href="./todo.png" type="image/gif">
@@ -18,11 +23,21 @@
 <body>
     <header class="header signed-out hidden">
         <div class="logo-area">
-            <img src="logo.jpg" alt="logo-main" class="logo-nav-menu" />
+            <img src="./assets/logo_signIn.png" alt="logo-main" class="logo-nav-menu" />
         </div>
         <nav class="nav-menu">
-            <button class="signout">Log out</button>
-            <button class="account-info"><img src="" alt="Account"></button>
+            <button class="account-info"><img src="./assets/photo.png" alt="Account" class="accoun-info-img"></button>
+            <section class="section-account hidden">
+                <button class="add-avatar">
+                    <label for="userAvatar">
+                        <img src='./assets/add-avatar.png' class="img-account" alt="AVATAR" data-account-img>
+                        <input type="file" src="./assets/photo.png" alt="Avatar" id="userAvatar" name='userAvatar' class="input-avatar" data-userAvatar/>
+                    </label>
+                </button>
+                <div class="account-content">
+                </div>
+                <button class="signout button-signOut"><span>Log out</span></button>
+            </section>
         </nav>
     </header>
 
@@ -38,19 +53,19 @@
             <form id="signup-form" class="form">
                 <div class="input-field username">
                     <img src="./assets/username.png" alt="username" class="input-img">
-                    <label for="nickname">
+                    <label for="nickname" class="regist-label">
                         <input type="text" class="regist-input" placeholder="Username" id="nickname">
                     </label>
                 </div>
                 <div class="input-field">
                     <img src="./assets/email.png" alt="email" class="input-img">
-                    <label for="email">
+                    <label for="email" class="regist-label">
                     <input type="email" class="regist-input opacity" id="email" placeholder="Email" required />
                   </label>
                 </div>
                 <div class="input-field">
                     <img src="./assets/password.png" alt="password" class="input-img">
-                    <label for="password">    
+                    <label for="password" class="regist-label">    
                     <input type="password" class="regist-input" id="password" placeholder="Password" required />
                   </label>
                 </div>
@@ -61,17 +76,22 @@
 
         </div>
     </section>
-    <section class="section-account hidden" style="border: 1px solid black">
-        <img src="" alt="AVATAR" data-account-img>
-        <div class="account-content"></div>
-    </section>
     <section class="toDo-section signed-out hidden">
-        <form id="todo-form">
-            <label for="todo-input"><input type="text" id="todo-input" placeholder="Add you task" /></label>
-            <button class="add-task-button" data="addTask-btn">+</button>
+        <form id="todo-form" class="todo-Form">
+            <label for="todo-input" class="label-todo">
+                <input type="text" id="todo-input" class="todo-input" placeholder="Add you task" />
+            </label>
+            <button class="add-task-button" data="addTask-btn">
+                <img src="./assets/add_button.png" alt="add-task-button" class="img-add-task">
+            </button>
         </form>
     </section>
-    <div class="todo-list"></div>
+    <section class="todos-section signed-out hidden">
+        <h2 class="todo-section-text">Todo's</h2>
+        <article class="todo-list">
+        </article>
+    </section>
+
 
 </body>
 

@@ -1,0 +1,83 @@
+.section-account {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    border-radius: 5px;
+    padding: 10px;
+    position: absolute;
+    top: 70px;
+    right: 420px;
+}
+
+.hidden {
+    display: none;
+}
+
+.add-avatar {
+    background: none;
+    border: none;
+}
+
+.img-account {
+    width: 170px;
+}
+
+.button-signOut {
+    border-radius: 4px;
+    background-color: #062F56;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.button-signOut span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.button-signOut span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+
+.button-signOut:hover span {
+    padding-right: 25px;
+}
+
+.button-signOut:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.account-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+.account-paragraf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.email-info {
+    opacity: 0.7;
+}

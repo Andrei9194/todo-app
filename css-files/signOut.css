@@ -1,0 +1,14 @@
+.focus-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.focus-submit-btn {
+    margin-bottom: 30px;
+}
+
+.input-avatar {
+    display: none;
+}

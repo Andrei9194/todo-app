@@ -5,14 +5,9 @@ html * {
 
 body {
     margin: 0;
-    background-color: #052E55;
-}
-
-.header {
-    background-color: grey;
-}
-
-.regist-section {
+    background: #052E55;
+    width: 100%;
+    min-height: 595px;
     margin-top: 30px;
 }
 
@@ -42,17 +37,6 @@ body {
 
 #signup-form {
     padding-top: 25px;
-}
-
-.focus-field {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-bottom: 20px;
-}
-
-.focus-submit-btn {
-    margin-bottom: 30px;
 }
 
 .regist-btn {
@@ -92,6 +76,7 @@ body {
     width: 300px;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .input-field-btn {
@@ -126,15 +111,19 @@ body {
     padding-right: 13px;
 }
 
+.regist-label {
+    width: 100%;
+}
+
 .regist-input {
     border: none;
     border-left: 1px solid #9A9A9A;
-    width: 100%;
+    width: 257px;
     height: 40px;
     opacity: 0.8;
     opacity: 1;
-    padding-left: 5px;
     background: white;
+    padding: 0px;
 }
 
 .regist-input:focus {
@@ -145,30 +134,10 @@ body {
     background-color: none;
 }
 
-.hidden {
-    display: none;
-}
-
-.enter-form {
-    border: 1px black solid;
-    display: flex;
-    flex-direction: column;
-}
-
 .main-btns {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-}
-
-#registration-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.toDo-section {
-    border: 1px solid black;
 }
 
 .label:before {
@@ -181,4 +150,8 @@ body {
     height: 25px;
     text-align: center;
     line-height: 28px;
+}
+
+.hidden {
+    display: none;
 }
