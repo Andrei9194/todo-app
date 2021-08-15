@@ -164,7 +164,7 @@ const showTask = (tasks) => { //token
                 <form class='task-content'>
                     <div class='lable-section'>
                         <label for="${id}" data-label>
-                            <img src="Group.png" alt="task-done" data-id="${id}" data-checkbox-img class="a" />
+                            <img src="./assets/Group.png" alt="task-done" data-id="${id}" data-checkbox-img class="a" />
                             <input type="checkbox" data-checkbox id="${id}"  style="display: none"/>
                         </label>
                         <label class="task-label" for="${id}">
@@ -248,7 +248,7 @@ const showTask = (tasks) => { //token
                 images.forEach(img => {
                     const imgId = img.dataset.id
                     if (imgId === id) {
-                        img.setAttribute("src", "check.png")
+                        img.setAttribute("src", "./assets/check.png")
                     }
                 })
             }
