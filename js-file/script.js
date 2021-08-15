@@ -85,8 +85,8 @@ signOut.addEventListener('click', (e) => {
 
 const accoutInfo = document.querySelector('.account-info')
 const accountSection = document.querySelector('.section-account')
-console.log(accountSection)
+
 accoutInfo.addEventListener('click', (e) => {
     e.preventDefault();
-    accountSection.classList.toggle("hidden")
+    accountSection.classList.toggle("hidden");
 })
