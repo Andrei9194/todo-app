@@ -6,10 +6,21 @@ const signUpButton = document.querySelector('.signup')
 const signInButton = document.querySelector('.signin')
 const registForm = document.querySelector('#signup-form')
 const registSection = document.querySelector('.regist-section')
+const submitButton = document.querySelector('.submit-btn')
+
+signUpButton.addEventListener('click', () => {
+    registForm.id = 'signup-form'
+    submitButton.textContent = 'Sign Up'
+})
+
+signInButton.addEventListener('click', () => {
+    registForm.id = 'signin-form'
+    submitButton.textContent = 'Sign In'
+
+})
 
 const getData = (e) => {
     e.preventDefault();
-
     const email = registForm['email'].value;
     const password = registForm['password'].value;
 
@@ -17,6 +28,7 @@ const getData = (e) => {
         email,
         password
     }
+
     if (registForm.id === 'signup-form') {
         userSignUp(datas)
     } else {
@@ -24,22 +36,12 @@ const getData = (e) => {
     }
     registForm.reset();
 }
-signUpButton.addEventListener('click', () => {
-    registForm.style.backgroundColor = "red"
-    registForm.id = 'signup-form'
-})
-signInButton.addEventListener('click', () => {
-    registForm.style.backgroundColor = "blue"
-    registForm.id = 'sign-form'
-})
 
 const header = document.querySelector('.header')
 
 const userSignIn = (token) => {
-    auth.signInWithEmailAndPassword(token.email, token.password).then(() => {
+    auth.signInWithEmailAndPassword(token.email, token.password).then((user) => {
         registSection.classList.add('hidden')
-        header.classList.remove('hidden')
-
     })
 }
 
@@ -53,9 +55,7 @@ const userSignUp = (token) => {
             })
         })
         .then(() => {
-            auth.signOut().then(() => {
-                console.log('sign out')
-            })
+            auth.signOut()
         })
 }
 
@@ -63,21 +63,41 @@ registForm.addEventListener('submit', getData);
 
 const signOutLinks = document.querySelectorAll('.signed-out')
 const signInLinks = document.querySelector('.signed-in');
+const accountContent = document.querySelector('.account-content')
 
-console.log(signOutLinks);
-console.log(signInLinks)
+const signLinks = (signin) => { //(token)
+    if (signin) {
+        db.collection('users').doc(signin.uid).get().then((user) => {
+            const html = `
+                <p>You email: ${signin.email}</p>
+                <p>You nickname: ${user.data().username}</p>
+            `
+            accountContent.innerHTML = html;
 
-auth.onAuthStateChanged((user) => {
-    if (user) {
+        })
         signOutLinks.forEach(link => link.style.display = "block")
         signInLinks.style.display = "none"
     } else {
         signOutLinks.forEach(link => link.style.display = "none")
         signInLinks.style.display = "block"
     }
+}
+
+
+auth.onAuthStateChanged((user) => { //(token)
+    if (user) {
+        db.collection('todo').onSnapshot((users) => {
+            showTask(users)
+            signLinks(user)
+        })
+    } else {
+        signLinks()
+        showTask([])
+    }
 })
 
 const signOut = document.querySelector('.signout')
+
 signOut.addEventListener('click', (e) => {
     e.preventDefault();
     auth.signOut()
@@ -89,4 +109,109 @@ const accountSection = document.querySelector('.section-account')
 accoutInfo.addEventListener('click', (e) => {
     e.preventDefault();
     accountSection.classList.toggle("hidden");
+})
+
+const toDoList = document.querySelector('.todo-list')
+
+const showTask = (tasks) => { //token
+    let html = "";
+    tasks.forEach(task => {
+        const id = task.id;
+        const data = task.data();
+        const ul = `
+            <ul class="das">
+                <li class=""> 
+                <input type="checkbox" data-checkbox id="${id}" data-id="${id}" style="display: none"/>
+                <label for="${id}" class="label" data-label>
+                <img src="Group.png" alt="task-done" data-id="${id}" data-checkbox-img class="a" width = "5%"/>
+                </label>
+                    <input type='text'data-id="${id}" name="tasks" class="added-task" value='${data.task}' disabled/> 
+                    <button data-id="${id}" data-delete-btn>Delete</button>
+                    <button data-id="${id}" data-edit-btn>Edit</button
+                </li>
+            </ul>
+            `
+        html += ul
+    });
+
+    toDoList.innerHTML = html
+
+    toDoList.querySelectorAll('[data-delete-btn]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.target.dataset.id
+            db.collection('todo').doc(id).delete()
+
+        })
+    })
+
+    const inputTasksEdit = document.querySelectorAll('.added-task');
+
+    toDoList.querySelectorAll('[data-edit-btn]').forEach(btn => {
+
+        btn.addEventListener('click', (e) => {
+
+            const id = e.target.dataset.id;
+            inputTasksEdit.forEach(task => {
+                const taskId = task.dataset.id
+                if (id === taskId) {
+                    task.removeAttribute('disabled')
+                    task.addEventListener('keydown', (e) => {
+                        if (e.keyCode === 13) {
+                            task.setAttribute('disabled', true)
+                            db.collection('todo').doc(id).update({
+                                task: task.value
+                            })
+                        }
+                    })
+                }
+            })
+        })
+    })
+
+    const checkbox = document.querySelectorAll('[data-checkbox]')
+    const images = document.querySelectorAll('[data-checkbox-img]');
+
+    checkbox.forEach(item => {
+        item.addEventListener('click', (e) => {
+
+            const id = e.target.dataset.id
+            if (item.checked) {
+                db.collection('todo').doc(id).update({
+                    done: item.checked
+                })
+                inputTasksEdit.forEach(item => {
+                    const itemId = item.dataset.id
+                    if (itemId === id) {
+                        item.style.textDecoration = 'line-through'
+                    }
+                })
+                images.forEach(img => {
+                    const imgId = img.dataset.id
+                    if (imgId === id) {
+                        img.src = 'check.png'
+                    }
+                })
+            } else {
+                db.collection('todo').doc(id).update({
+                    done: item.checked
+                })
+            }
+        })
+    })
+}
+
+
+const toDoForm = document.querySelector('#todo-form')
+
+toDoForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    db.collection('todo').add({
+        task: toDoForm['todo-input'].value,
+        done: false
+    }).then(() => {
+        toDoForm.reset();
+    }).catch((err) => {
+        toDoForm.reset();
+        alert(err.message)
+    })
 })
