@@ -113,17 +113,19 @@ body {
 
 .regist-label {
     width: 100%;
+    border-left: 1px solid #9A9A9A;
 }
 
 .regist-input {
     border: none;
-    border-left: 1px solid #9A9A9A;
-    width: 257px;
+    border-radius: 0px 5px 5px 0px;
     height: 40px;
     opacity: 0.8;
     opacity: 1;
     background: white;
     padding: 0px;
+    text-indent: 5px;
+    width: 100%;
 }
 
 .regist-input:focus {
@@ -132,6 +134,10 @@ body {
 
 .regist-input:active {
     background-color: none;
+}
+
+.regist-input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
 
 .main-btns {
