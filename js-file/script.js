@@ -202,15 +202,16 @@ const showTask = (tasks) => { //token
             images.forEach(img => {
                 const imgId = img.dataset.id
                 if (imgId === id) {
-                    img.setAttribute("src", "Group.png")
+                    img.setAttribute("src", "./assets/Group.png")
                 }
             })
             inputTasksEdit.forEach(task => {
                 const taskId = task.dataset.id
                 if (id === taskId) {
                     task.removeAttribute('disabled')
-                    task.style.textDecoration = 'none'
-                    task.style.borderBottom = '1px solid black'
+                    task.style.textDecoration = 'none';
+                    task.style.border = '1px solid grey'
+                    task.style.borderRadius = '5px'
                     task.addEventListener('keydown', (e) => {
                         if (e.keyCode === 13) {
                             task.setAttribute('disabled', true)
